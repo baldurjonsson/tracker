@@ -4,7 +4,9 @@ go 1.22.0
 
 require (
 	github.com/buger/goterm v1.0.4
+	github.com/go-pdf/fpdf v0.9.0
 	github.com/urfave/cli/v2 v2.27.2
+	golang.org/x/text v0.16.0
 )
 
 require (

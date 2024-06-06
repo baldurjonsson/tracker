@@ -48,6 +48,18 @@ func main() {
 				Action:  action.ListTimesheets,
 				Subcommands: []*cli.Command{
 					{
+						Name:  "renderpdf",
+						Usage: "Render timesheet as PDF",
+						Flags: []cli.Flag{
+							&cli.StringFlag{
+								Name:  "filename",
+								Usage: "Filename to save the PDF to",
+								Value: "timesheet.pdf",
+							},
+						},
+						Action: action.RenderTimesheetPDF,
+					},
+					{
 						Name:    "list",
 						Aliases: []string{"l"},
 						Usage:   "List Timesheets",
