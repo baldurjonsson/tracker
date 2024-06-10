@@ -140,6 +140,14 @@ func main() {
 						Args:    true,
 						Action:  action.DeleteEntry,
 					},
+					{
+						Name:  "sort",
+						Usage: "Sort Entries",
+						Action: func(c *cli.Context) error {
+							action.SortEntries(c)
+							return nil
+						},
+					},
 				},
 			},
 		},

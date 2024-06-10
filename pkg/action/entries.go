@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"time"
 
@@ -60,6 +61,15 @@ func CreateEntry(c *cli.Context) error {
 		Billable: billable,
 	}
 	s.Entries.Entries = append(s.Entries.Entries, entry)
+	SortEntries(c)
+	return s.Save()
+}
+
+func SortEntries(c *cli.Context) error {
+	s := c.Context.Value("store").(*store.Store)
+	sort.Slice(s.Entries.Entries, func(i, j int) bool {
+		return s.Entries.Entries[i].Date.Before(s.Entries.Entries[j].Date)
+	})
 	return s.Save()
 }
 
