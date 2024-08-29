@@ -126,6 +126,14 @@ func main() {
 						Aliases: []string{"l"},
 						Usage:   "List Entries",
 						Action:  action.ListEntries,
+						Flags: []cli.Flag{
+							&cli.TimestampFlag{
+								Name:     "from",
+								Usage:    "Show entries dated after",
+								Required: false,
+								Layout:   "2006-01-02",
+							},
+						},
 					},
 					{
 						Name:    "create",

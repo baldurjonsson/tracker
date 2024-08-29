@@ -29,7 +29,19 @@ func PrintEntriesTable(entries []*store.Entry) {
 
 func ListEntries(c *cli.Context) error {
 	s := c.Context.Value("store").(*store.Store)
-	PrintEntriesTable(s.Entries.Entries)
+	from := c.Timestamp("from")
+
+	if from != nil {
+		var filtered []*store.Entry
+		for _, entry := range s.Entries.Entries {
+			if entry.Date.After(*from) {
+				filtered = append(filtered, entry)
+			}
+		}
+		PrintEntriesTable(filtered)
+	} else {
+		PrintEntriesTable(s.Entries.Entries)
+	}
 	return nil
 }
 
